@@ -14,9 +14,8 @@ class User(db.Model):
     user_name = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-    user_comments = db.Column(db.Integer, db.ForeignKey('comments.comment_id'))
 
-    comments = db.relationship('Comment', back_populates='user')
+    user_comments = db.relationship('Comment', back_populates='user')
 
     def __repr__(self):
         return f'<User user_id={self.user_id} user_name={self.user_name}>'
@@ -28,11 +27,11 @@ class Comment(db.Model):
 
     comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     comment_text = db.Column(db.Text)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'), nullable=False)
 
-    user = db.relationship('User', back_populates='comments')
-    poem = db.relationship('Poem', back_populates='comments')
+    user = db.relationship('User', back_populates='user_comments')
+    poem = db.relationship('Poem', back_populates='poem_comments')
 
     def __repr__(self):
         return f"<Comment comment_id={self.comment_id} user_id={self.user_id} poem_id={self.poem_id}>"
@@ -47,10 +46,9 @@ class Poem(db.Model):
     poem_title = db.Column(db.String)
     poem_type = db.Column(db.String)
     poem_text = db.Column(db.Text)
-    poet = db.Column(db.Integer, db.ForeignKey('poets.poet_id'))
-    comments = db.Column(db.Integer, db.ForeignKey('comments.comment_id'))
+    poet_id = db.Column(db.Integer, db.ForeignKey('poets.poet_id'), nullable=False)
 
-    comments = db.relationship('Comment', back_populates='poem')
+    poem_comments = db.relationship('Comment', back_populates='poem')
     poet = db.relationship('Poet', back_populates='poems')
     books = db.relationship('Book', secondary='books_poems', back_populates='poems')
 
@@ -92,22 +90,21 @@ class Poet(db.Model):
     lname = db.Column(db.String)
     birthdate = db.Column(db.Integer)
     deathdate = db.Column(db.Integer)
-    poems_by_poet = db.Column(db.Integer, db.ForeignKey('poems.poem_id'))
 
     poems = db.relationship('Poem', back_populates='poet')
 
     def __repr__(self):
         return f'<Poet poet_id={self.poet_id} fname={self.fname} lname={self.lname}>'
 
-# def connect_to_db(flask_app, db_uri="postgresql:///", echo=False):
-#     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-#     flask_app.config["SQLALCHEMY_ECHO"] = echo
-#     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+def connect_to_db(flask_app, db_uri="postgresql:///sonnettrace", echo=False):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-#     db.app = flask_app
-#     db.init_app(flask_app)
+    db.app = flask_app
+    db.init_app(flask_app)
 
-#     print("Connected to the db!")
+    print("Connected to the db!")
 
 if __name__ == "__main__":
     from server import app
