@@ -45,15 +45,30 @@ class Poem(db.Model):
     
     poem_title = db.Column(db.String)
     poem_type = db.Column(db.String)
-    poem_text = db.Column(db.Text)
     poet_id = db.Column(db.Integer, db.ForeignKey('poets.poet_id'), nullable=False)
 
     poem_comments = db.relationship('Comment', back_populates='poem')
     poet = db.relationship('Poet', back_populates='poems')
+    lines = db.relationship('Line', back_populates='poem')
     books = db.relationship('Book', secondary='books_poems', back_populates='poems')
 
     def __repr__(self):
         return f"<Poem poem_id={self.poem_id} poem_title={self.poem_title}>"
+
+class Line(db.Model):
+    '''A line of poetry.'''
+
+    __tablename__ = 'lines'
+
+    line_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    
+    line_text = db.Column(db.Text)
+    poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'), nullable=False)
+
+    poem = db.relationship('Poem', back_populates='lines')
+
+    def __repr__(self):
+        return f"<Line line_id={self.line_id} line_text={self.line_text}>"
 
 class BookPoem(db.Model):
     '''An anthology containing a specific poem.'''
