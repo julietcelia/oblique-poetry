@@ -103,8 +103,8 @@ class Poet(db.Model):
     poet_id = db.Column(db.String, autoincrement=True, primary_key=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
-    birthdate = db.Column(db.Integer)
-    deathdate = db.Column(db.Integer)
+    birthdate = db.Column(db.Integer, nullable=True)
+    deathdate = db.Column(db.Integer, nullable=True)
 
     poems = db.relationship('Poem', back_populates='poet')
 
