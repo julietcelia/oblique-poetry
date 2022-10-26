@@ -109,10 +109,47 @@ def create_comment(comment_text, user_id, poem_id):
 
     return comment
 
+def get_comments_by_user_id(user_id):
+    """Return comments by user's primary key."""
+
+    return Comment.query.get(user_id).all()
+
+def get_comment_by_comment_id(comment_id):
+    """Return a comment by primary key."""
+
+    return Comment.query.get(comment_id)
+
 def update_comment(comment_id, new_text):
-    """ Update a rating given rating_id and the updated score. """
+    """ Update a comment given primary key and new comment text. """
+    
     comment = Comment.query.get(comment_id)
     comment.comment_text = new_text
+
+def create_line(line_text, poem_id):
+    """Create and return a new line of poetry."""
+
+    line = Line(
+        line_text = line_text,
+        poem_id = poem_id
+    )
+
+    return line
+
+def get_lines_by_poem(poem_id):
+    """Return lines in a poem by poem's primary key."""
+
+    return Line.query.get(poem_id).all()
+
+def get_line_by_line_id(line_id):
+    """Return a line of poetry by primary key."""
+
+    return Line.query.get(line_id)
+
+def update_line(line_id, new_text):
+    """Update a line of poetry given primary key and new line text."""
+    
+    line = Line.query.get(line_id)
+    line.line_text = new_text
 
 if __name__ == "__main__":
     from server import app

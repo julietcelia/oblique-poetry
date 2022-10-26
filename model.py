@@ -100,7 +100,7 @@ class Poet(db.Model):
 
     __tablename__ = 'poets'
 
-    poet_id = db.Column(db.String, autoincrement=True, primary_key=True)
+    poet_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     birthdate = db.Column(db.Integer, nullable=True)
