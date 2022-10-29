@@ -96,7 +96,7 @@ def get_poet_by_id(poet_id):
 def get_poet_by_last_name(lname):
     """Return a poet by last name."""
 
-    return Poet.query.get(lname)
+    return Poet.query.filter(Poet.lname == lname).all()
 
 def create_comment(comment_text, user_id, poem_id):
     """Create and return a new comment."""
@@ -112,7 +112,7 @@ def create_comment(comment_text, user_id, poem_id):
 def get_comments_by_user_id(user_id):
     """Return comments by user's primary key."""
 
-    return Comment.query.get(user_id).all()
+    return Comment.query.filter(Comment.user_id == user_id).all()
 
 def get_comment_by_comment_id(comment_id):
     """Return a comment by primary key."""
@@ -138,7 +138,7 @@ def create_line(line_text, poem_id):
 def get_lines_by_poem(poem_id):
     """Return lines in a poem by poem's primary key."""
 
-    return Line.query.get(poem_id).all()
+    return Line.query.filter(Line.poem_id == poem_id).all()
 
 def get_line_by_line_id(line_id):
     """Return a line of poetry by primary key."""

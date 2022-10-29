@@ -47,6 +47,22 @@ for poem in poem_data:
 model.db.session.add_all(poems_in_db)
 model.db.session.commit()
 
+with open("data/lines.json") as f:
+    line_data = json.loads(f.read())
+
+lines_in_db = []
+for line in line_data:
+    line_text, poem_id = (
+        line["line_text"],
+        line["poem_id"]
+    )
+
+    db_line = crud.create_line(line_text, poem_id)
+    lines_in_db.append(db_line)
+
+model.db.session.add_all(lines_in_db)
+model.db.session.commit()
+
 test_comments = [
     "Beautiful!",
     "Wow!",
