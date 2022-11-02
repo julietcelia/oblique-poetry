@@ -1,4 +1,4 @@
-from model import db, User, Comment, Poem, Line, BookPoem, Book, Poet, connect_to_db
+from model import db, User, Comment, Poem, Line, Poet, connect_to_db
 
 
 def create_user(user_name, email, password):
@@ -49,37 +49,10 @@ def get_poem_by_id(poem_id):
 
     return Poem.query.get(poem_id)
 
-def create_book(book_title, book_date, book_cover, book_link):
-    """Create and return a poetry anthology."""
-
-    book = Book(
-        book_title=book_title,
-        book_date=book_date,
-        book_cover=book_cover,
-        book_link=book_link
-    )
-
-    return book
-
-def get_books():
-    """Return all poetry anthologies."""
-
-    return Book.query.all()
-
-def get_book_by_id(book_id):
-    """Return a poetry anthology by primary key."""
-
-    return Book.query.get(book_id)
-
-def create_poet(fname, lname, birthdate="0", deathdate="0"):
+def create_poet(name):
     """Create and return a poet."""
 
-    poet = Poet(
-        fname=fname,
-        lname=lname,
-        birthdate=birthdate,
-        deathdate=deathdate
-    )
+    poet = Poet(name=name)
 
     return poet
 
@@ -93,10 +66,10 @@ def get_poet_by_id(poet_id):
 
     return Poet.query.get(poet_id)
 
-def get_poet_by_last_name(lname):
-    """Return a poet by last name."""
+def get_poet_by_last_name(name):
+    """Return a poet by name."""
 
-    return Poet.query.filter(Poet.lname == lname).all()
+    return Poet.query.filter(Poet.name == name).all()
 
 def create_comment(comment_text, user_id, poem_id):
     """Create and return a new comment."""

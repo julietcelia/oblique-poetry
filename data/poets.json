@@ -1,73 +1,43 @@
 [
 
     {
-    "fname": "William",
-    "lname": "Shakespeare",
-    "birthdate": "1564",
-    "deathdate": "1616"
+    "name": "William Shakespeare"
     },
 
     {
-    "fname": "John",
-    "lname": "Milton",
-    "birthdate": "1608",
-    "deathdate": "1674"
+    "name": "John Milton"
     },
     
-{
-    "fname": "William",
-    "lname": "Wordsworth",
-    "birthdate": "1770",
-    "deathdate": "1850"
+    {
+    "name": "William Wordsworth"
     },
     
-{
-    "fname": "John",
-    "lname": "Keats",
-    "birthdate": "1795",
-    "deathdate": "1821"
+    {
+    "name": "John Keats"
     },
     
-{
-    "fname": "Elizabeth",
-    "lname": "Barrett Browning",
-    "birthdate": "1806",
-    "deathdate": "1861"
+    {
+    "name": "Elizabeth Barrett Browning"
     },
     
-{
-    "fname": "Dante Gabriel",
-    "lname": "Rossetti",
-    "birthdate": "1828",
-    "deathdate": "1882"
+    {
+    "name": "Dante Gabriel Rossetti"
     },
     
-{
-    "fname": "Christina",
-    "lname": "Rossetti",
-    "birthdate": "1830",
-    "deathdate": "1894"
+    {
+    "name": "Christina Rossetti"
     },
     
-{
-    "fname": "Emma",
-    "lname": "Lazarus",
-    "birthdate": "1849",
-    "deathdate": "1887"
+    {
+    "name": "Emma Lazarus"
     },
     
-{
-    "fname": "Edna St. Vincent",
-    "lname": "Millay",
-    "birthdate": "1892",
-    "deathdate": "1950"
+    {
+    "name": "Edna St. Vincent Millay"
     },
     
-{
-    "fname": "Countee",
-    "lname": "Cullen",
-    "birthdate": "1903",
-    "deathdate": "1946"
+    {
+    "name": "Countee Cullen"
     }
     
 ]

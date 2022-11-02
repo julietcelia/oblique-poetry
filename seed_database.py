@@ -17,14 +17,8 @@ with open("data/poets.json") as f:
 
 poets_in_db = []
 for poet in poet_data:
-    fname, lname, birthdate, deathdate = (
-        poet["fname"],
-        poet["lname"],
-        poet["birthdate"],
-        poet["deathdate"]
-    )
-
-    db_poet = crud.create_poet(fname, lname, birthdate, deathdate)
+    name = (poet["name"])
+    db_poet = crud.create_poet(name)
     poets_in_db.append(db_poet)
 
 model.db.session.add_all(poets_in_db)
