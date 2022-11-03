@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{ poem.poem_title }}</title>
 </head>
 <body>
+    {% extends 'base.html' %}
+    {% block title %}
+        {{ poem.poem_title }}
+    {% endblock %}
+    {% block body %}
+    <h1>{{ poem.poem_title }}</h1>
+    {% for line in poem.lines %}
+    <p>
+        {{line.line_text}}    
+    </p>
+    {% endfor %}
+    {% if session.get('user_email') %}
+    <h2>Comment on this poem:</h2>
+    <form action="/poems/{{ poems.poem_id }}/comments" method="POST">
+        <label for="comment">Comment: </label>
+        <input type="text" id="comment" name="comment">
+        <br>
+        <input type="submit">
+    </form>
+    {% endif %}
+    {% endblock %}
+    
     
 </body>
 </html>
