@@ -28,13 +28,12 @@ def get_user_by_user_name(user_name):
 
     return User.query.filter(User.user_name == user_name).first()
 
-def create_poem(poem_title, poem_type, poet_id):
+def create_poem(poem_title, poet_id):
     """Create and return a new poem."""
 
     poem = Poem(
         poem_title=poem_title,
-        poem_type=poem_type,
-        poet_id=poet_id,
+        poet_id=poet_id
     )
 
     return poem

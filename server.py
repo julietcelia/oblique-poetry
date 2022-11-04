@@ -108,6 +108,17 @@ def process_login():
 
     return redirect("/")
 
+@app.route("/logout")
+def process_logout():
+    """Process user logout."""
+
+    logged_in_email = session.get("user_email")
+    user = crud.get_user_by_email(logged_in_email)
+    session["user_email"] = None
+    flash(f"Goodbye, {user.user_name}!")
+
+    return redirect("/")
+
 @app.route("/update_comment", methods=["POST"])
 def update_comment():
     """Update the text of a user comment."""

@@ -23,6 +23,7 @@
         <a href="/users">View all users</a>
     </li>
 </ul>
+{% if not session.get('user_email') %}
 <h2>Create an account</h2>
 <form action="/users" method="POST">
     <p>
@@ -41,6 +42,8 @@
         <input type="submit">
     </p>
 </form>
+{% endif %}
+{% if not session.get('user_email') %}
 <h2>Log In</h2>
 <form action="/login" method="POST">
     <p>
@@ -55,6 +58,16 @@
         <input type="submit">
     </p>
 </form>
-    {% endblock %}
+{% endif %}
+{% if session.get('user_email') %}
+<form action="/logout">
+    <p>
+    <button type="button" class="btn">
+      Log out
+    </button>
+    </p>
+</form>
+{% endif %}
+{% endblock %}
 </body>
 </html>

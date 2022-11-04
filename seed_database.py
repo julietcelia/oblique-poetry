@@ -29,13 +29,12 @@ with open("data/poems.json") as f:
 
 poems_in_db = []
 for poem in poem_data:
-    poem_title, poem_type, poet_id = (
+    poem_title, poet_id = (
         poem["poem_title"],
-        poem["poem_type"],
         poem["poet_id"]
     )
 
-    db_poem = crud.create_poem(poem_title, poem_type, poet_id)
+    db_poem = crud.create_poem(poem_title, poet_id)
     poems_in_db.append(db_poem)
 
 model.db.session.add_all(poems_in_db)

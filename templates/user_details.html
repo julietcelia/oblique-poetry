@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Bio</title>
 </head>
 <body>
-    
+    {% extends 'base.html' %}
+    {% block title %}{{ user.user_name }}'s User Page{% endblock %}
+    {% block body %}
+        <h1>{{ user.user_name }}</h1>
+        <h1>Comments left on poems:</h1><br>
+        <ul>
+            {% for comment in user.user_comments %}
+            <li>
+                <a href="/poems/{{ comment.poem.poem_id }}">
+                {{ comment.poem.poem_title }}</a>:
+                <div>{{ comment.comment_text }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
 </body>
 </html>

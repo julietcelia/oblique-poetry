@@ -44,7 +44,6 @@ class Poem(db.Model):
     poem_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     
     poem_title = db.Column(db.String)
-    poem_type = db.Column(db.String)
     poet_id = db.Column(db.Integer, db.ForeignKey('poets.poet_id'), nullable=False)
 
     poem_comments = db.relationship('Comment', back_populates='poem')

@@ -1,241 +1,201 @@
 [
     {
     "poem_title": "Sonnet 53",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "1"
     },
 
    {
     "poem_title": "Sonnet 86",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "1"
     },
 
     {
     "poem_title": "Sonnet 116",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "1"
     },
 
     {
     "poem_title": "Sonnet 130",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "1"
     },
 
     {
     "poem_title": "Sonnet 144",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "1"
     },
 
     {
     "poem_title": "On His Blindness",
-    "poem_type": "italian_sonnet",
     "poet_id": "2"
     },
 
     {
     "poem_title": "On The Late Massacre in Piedmont",
-    "poem_type": "italian_sonnet",
     "poet_id": "2"
     },
 
     {
     "poem_title": "On His Deceased Wife",
-    "poem_type": "italian_sonnet",
     "poet_id": "2"
     },
 
     {
     "poem_title": "The World Is Too Much with Us",
-    "poem_type": "italian_sonnet",
     "poet_id": "3"
     },
 
     {
     "poem_title": "Nuns Fret Not at Their Convent's Narrow Room",
-    "poem_type": "italian_sonnet",
     "poet_id": "3"
     },
 
     {
     "poem_title": "Scorn Not the Sonnet",
-    "poem_type": "hybrid_sonnet",
     "poet_id": "3"
     },
 
     {
     "poem_title": "Composed upon Westminster Bridge, September 3, 1802",
-    "poem_type": "italian_sonnet",
     "poet_id": "3"
     },
 
     {
     "poem_title": "Mutability",
-    "poem_type": "italian_sonnet",
     "poet_id": "3"
     },
 
     {
     "poem_title": "On First Looking into Chapman's Homer",
-    "poem_type": "italian_sonnet",
     "poet_id": "4"
     },
 
     {
     "poem_title": "When I Have Fears that I May Cease to Be",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "4"
     },
 
     {
     "poem_title": "Bright Star",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "4"
     },
 
     {
     "poem_title": "Sonnet 33",
-    "poem_type": "italian_sonnet",
     "poet_id": "5"
     },
 
     {
     "poem_title": "Sonnet 43",
-    "poem_type": "italian_sonnet",
     "poet_id": "5"
     },
 
     {
     "poem_title": "Grief",
-    "poem_type": "italian_sonnet",
     "poet_id": "5"
     },
 
     {
     "poem_title": "A Sonnet",
-    "poem_type": "italian_sonnet",
     "poet_id": "6"
     },
 
     {
     "poem_title": "Love and Hope",
-    "poem_type": "italian_sonnet",
     "poet_id": "6"
     },
 
     {
     "poem_title": "Broken Music",
-    "poem_type": "italian_sonnet",
     "poet_id": "6"
     },
 
     {
     "poem_title": "Transfigured Life",
-    "poem_type": "italian_sonnet",
     "poet_id": "6"
     },
 
     {
     "poem_title": "The Monochord",
-    "poem_type": "italian_sonnet",
     "poet_id": "6"
     },
 
     {
-    "poem_title": "In an Artist’s Studio",
-    "poem_type": "italian_sonnet",
+    "poem_title": "In an Artist's Studio",
     "poet_id": "7"
     },
 
     {
     "poem_title": "I Wish I Could Remember that First Day",
-    "poem_type": "italian_sonnet",
     "poet_id": "7"
     },
 
     {
     "poem_title": "A Study (A Soul)",
-    "poem_type": "italian_sonnet",
     "poet_id": "7"
     },
 
     {
     "poem_title": "I Loved You First",
-    "poem_type": "italian_sonnet",
     "poet_id": "7"
     },
 
     {
     "poem_title": "After Death",
-    "poem_type": "italian_sonnet",
     "poet_id": "7"
     },
 
     {
     "poem_title": "The New Colossus",
-    "poem_type": "italian_sonnet",
     "poet_id": "8"
     },
 
     {
     "poem_title": "1492",
-    "poem_type": "italian_sonnet",
     "poet_id": "8"
     },
 
     {
     "poem_title": "Assurance",
-    "poem_type": "hybrid_sonnet",
     "poet_id": "8"
     },
 
     {
     "poem_title": "Love, though for This You Riddle Me with Darts",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "9"
     },
 
     {
     "poem_title": "I Think I Should Have Loved You Presently",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "9"
     },
 
     {
     "poem_title": "Oh, Think Not I Am Faithful to a Vow!",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "9"
     },
 
     {
     "poem_title": "I Shall Forget You Presently, My Dear",
-    "poem_type": "shakespearean_sonnet",
     "poet_id": "9"
     },
 
     {
     "poem_title": "Euclid Alone Has Looked on Beauty Bare",
-    "poem_type": "italian_sonnet",
     "poet_id": "9"
     },
 
     {
     "poem_title": "Yet Do I Marvel",
-    "poem_type": "hybrid_sonnet",
     "poet_id": "10"
     },
 
     {
     "poem_title": "Oh, for a Little While Be Kind",
-    "poem_type": "hybrid_sonnet",
     "poet_id": "10"
     },
 
     {
     "poem_title": "To My Friends",
-    "poem_type": "hybrid_sonnet",
     "poet_id": "10"
     }
 
