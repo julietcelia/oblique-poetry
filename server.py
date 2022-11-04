@@ -112,10 +112,10 @@ def process_login():
 def process_logout():
     """Process user logout."""
 
-    logged_in_email = session.get("user_email")
-    user = crud.get_user_by_email(logged_in_email)
-    session["user_email"] = None
-    flash(f"Goodbye, {user.user_name}!")
+    user = crud.get_user_by_email(session["user_email"])
+    user_name = user.user_name
+    session.clear()
+    flash(f"Goodbye, {user_name}!")
 
     return redirect("/")
 

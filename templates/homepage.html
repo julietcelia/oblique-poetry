@@ -61,11 +61,9 @@
 {% endif %}
 {% if session.get('user_email') %}
 <form action="/logout">
-    <p>
-    <button type="button" class="btn">
-      Log out
+    <button type="submit" class="btn">
+      Log Out
     </button>
-    </p>
 </form>
 {% endif %}
 {% endblock %}
