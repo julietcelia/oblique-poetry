@@ -65,7 +65,7 @@ def get_poet_by_id(poet_id):
 
     return Poet.query.get(poet_id)
 
-def get_poet_by_last_name(name):
+def get_poet_by_name(name):
     """Return a poet by name."""
 
     return Poet.query.filter(Poet.name == name).all()

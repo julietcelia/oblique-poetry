@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, flash, session, redirect
 
 from model import connect_to_db, db
+
+from sys import argv
+from pprint import pprint
+import json
+
+import requests
+
 import crud
 
 from jinja2 import StrictUndefined
@@ -153,6 +160,51 @@ def create_comment(poem_id):
         flash(f"You successfully left a comment on {poem_title}.")
 
     return redirect(f"/poems/{poem_id}")
+
+@app.route("/add_random_poem")
+def add_random_poem():
+    '''Make GET request from Poemist API to grab random poem and add it to the database,'''
+    '''and then send user to view that poem.'''
+    
+    # make the API request
+    res = requests.get('https://www.poemist.com/api/v1/randompoems')
+    poemist_poem = res.json()
+    print(poemist_poem)
+
+    # check to see if poet is already in database, if not, create the poet
+    poets_in_db = crud.get_poets()
+    random_poet = poemist_poem[0]['poet']['name']
+    if random_poet in poets_in_db:
+        new_poem_poet = crud.get_poet_by_name(random_poet)
+    else:
+        new_poem_poet = crud.create_poet(random_poet)
+
+    # check to see if poem is already in database, if not, create the poem
+    poems_by_poet = new_poem_poet.poems
+    random_poem = poemist_poem[0]["title"]
+
+    if random_poem in poems_by_poet:
+        flash('Poem already in database; please try again!')
+    else:
+        new_poem = crud.create_poem(random_poem, new_poem_poet.poet_id)
+
+    # take poem text from JSON, split into list of line strings
+    new_poem_text = poemist_poem[0]["content"]
+    new_poem_lines = new_poem_text.split('\n')
+    print(new_poem_lines)
+
+    # create line object for each line in list
+    for line in new_poem_lines:
+        crud.create_line(line, new_poem.poem_id)
+    
+    # send user to poem_details template for newly created poem
+    poem = new_poem
+
+    return render_template("poem_details.html", poem=poem)
+
+
+
+
 
 if __name__ == "__main__":
     connect_to_db(app)
