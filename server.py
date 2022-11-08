@@ -126,6 +126,27 @@ def process_logout():
 
     return redirect("/")
 
+@app.route("/delete_account")
+def delete_user():
+    """Delete User Account."""
+
+    user = crud.get_user_by_email(session["user_email"])
+    for comment in user.user_comments:
+        db.session.delete(comment)
+    db.session.delete(user)
+    db.session.commit()
+    session.clear()
+
+    return redirect("/")
+
+@app.route("/clear_session")
+def clear_session():
+    """For Debugging: Clears Session"""
+
+    session.clear()
+
+    return redirect("/")
+
 @app.route("/update_comment", methods=["POST"])
 def update_comment():
     """Update the text of a user comment."""
@@ -161,6 +182,17 @@ def create_comment(poem_id):
 
     return redirect(f"/poems/{poem_id}")
 
+@app.route("/delete_comment/<comment_id>")
+def delete_comment(comment_id):
+    """Delete User Comment."""
+
+    comment = crud.get_comment_by_comment_id(comment_id)
+    user = comment.user
+    db.session.delete(comment)
+    db.session.commit()
+
+    return redirect(f"/users/{user.user_id}")
+
 @app.route("/add_random_poem")
 def add_random_poem():
     '''Make GET request from Poemist API to grab random poem and add it to the database,'''
@@ -174,19 +206,28 @@ def add_random_poem():
     # check to see if poet is already in database, if not, create the poet
     poets_in_db = crud.get_poets()
     random_poet = poemist_poem[0]['poet']['name']
-    if random_poet in poets_in_db:
-        new_poem_poet = crud.get_poet_by_name(random_poet)
-    else:
+    new_poem_poet = ""
+    for poet in poets_in_db:
+        if poet.name == random_poet:
+            new_poem_poet = crud.get_poet_by_name(random_poet)
+    if not new_poem_poet:
         new_poem_poet = crud.create_poet(random_poet)
+        db.session.add(new_poem_poet)
+        db.session.commit()
 
     # check to see if poem is already in database, if not, create the poem
     poems_by_poet = new_poem_poet.poems
     random_poem = poemist_poem[0]["title"]
+    poem_in_poets = False
 
-    if random_poem in poems_by_poet:
-        flash('Poem already in database; please try again!')
-    else:
+    for poem in poems_by_poet:
+        if poem.poem_title == random_poem:
+            poem_in_poets = True
+            flash('Poem already in database; please try again!')
+    if not poem_in_poets:
         new_poem = crud.create_poem(random_poem, new_poem_poet.poet_id)
+        db.session.add(new_poem)
+        db.session.commit()
 
     # take poem text from JSON, split into list of line strings
     new_poem_text = poemist_poem[0]["content"]
@@ -195,7 +236,9 @@ def add_random_poem():
 
     # create line object for each line in list
     for line in new_poem_lines:
-        crud.create_line(line, new_poem.poem_id)
+        new_line = crud.create_line(line, new_poem.poem_id)
+        db.session.add(new_line)
+        db.session.commit()
     
     # send user to poem_details template for newly created poem
     poem = new_poem

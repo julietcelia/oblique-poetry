@@ -17,10 +17,31 @@
             <li>
                 <a href="/poems/{{ comment.poem.poem_id }}">
                 {{ comment.poem.poem_title }}</a>:
-                <div>{{ comment.comment_text }}</div>
+                <div>
+                    {{ comment.comment_text }}
+                </div>
+                {% if user.email == session.get('user_email') %}
+                    <form action="/edit_comment">
+                        <button type="submit" class="btn">
+                            Edit Comment
+                        </button>
+                    </form>
+                    <form action="/delete_comment/{{ comment.comment_id }}">
+                        <button type="submit" class="btn">
+                            Delete Comment
+                        </button>
+                    </form>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
+        {% if user.email == session.get('user_email') %}
+            <form action="/delete_account">
+                <button type="submit" class="btn">
+                Delete Account
+                </button>
+            </form>
+        {% endif %}
         {% endblock %}
 </body>
 </html>
