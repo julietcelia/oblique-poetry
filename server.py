@@ -193,6 +193,29 @@ def delete_comment(comment_id):
 
     return redirect(f"/users/{user.user_id}")
 
+@app.route("/users/<user_id>/bio", methods=["POST"])
+def create_bio(user_id):
+    """Create a user bio for the logged-in user."""
+
+    logged_in_email = session.get("user_email")
+    bio_text = request.form.get("bio")
+
+    if logged_in_email is None:
+        flash("You must log in to write a user bio.")
+    elif not bio_text:
+        flash("Error: you didn't write anything for your bio.")
+    else:
+        user = crud.get_user_by_email(logged_in_email)
+        user_id = user.user_id
+        user_name = user.user_name
+
+        crud.update_bio(user_id, bio_text)
+        db.session.commit()
+
+        flash(f"You successfully wrote a bio for yourself, {user_name}!")
+
+    return redirect(f"/users/{user_id}")
+
 @app.route("/add_random_poem")
 def add_random_poem():
     '''Make GET request from Poemist API to grab random poem and add it to the database,'''

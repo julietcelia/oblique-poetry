@@ -14,6 +14,7 @@ class User(db.Model):
     user_name = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    user_bio = db.Column(db.Text)
 
     user_comments = db.relationship('Comment', back_populates='user')
 

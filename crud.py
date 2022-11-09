@@ -98,6 +98,12 @@ def update_comment(comment_id, new_text):
     comment = Comment.query.get(comment_id)
     comment.comment_text = new_text
 
+def update_bio(user_id, bio_text):
+    """ Update a user's bio given user's primary key and text of bio. """
+    
+    user = User.query.get(user_id)
+    user.user_bio = bio_text
+
 def create_line(line_text, poem_id):
     """Create and return a new line of poetry."""
 

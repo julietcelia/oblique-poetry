@@ -11,6 +11,22 @@
     {% block title %}{{ user.user_name }}'s User Page{% endblock %}
     {% block body %}
         <h1>{{ user.user_name }}</h1>
+        {% if user.email == session.get('user_email') %}
+        {% if user.user_bio == None %}
+            <h1>Write a User Bio!:</h1>
+            <form action="/users/{{ user.user_id }}/bio" method="POST">
+            <label for="bio">Bio: </label>
+            <input type="text" id="bio" name="bio">
+            <br>
+            <input type="submit">
+            </form>
+        {% endif %}
+        {% endif %}
+        {% if user.user_bio != None %}
+            <div>
+                {{ user.user_bio }}
+            </div>
+        {% endif %}
         <h1>Comments left on poems:</h1><br>
         <ul>
             {% for comment in user.user_comments %}
