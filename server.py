@@ -23,6 +23,14 @@ def homepage():
 
     return render_template("homepage.html")
 
+@app.route("/user_settings")
+def user_settings():
+    """View User Settings."""
+
+    user = crud.get_user_by_email(session["user_email"])
+
+    return render_template("user_settings.html", user=user)
+
 @app.route("/poems")
 def all_poems():
     """View all poems."""

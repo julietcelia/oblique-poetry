@@ -9,10 +9,12 @@
 <body>
     {% extends 'base.html' %}
     {% block title %}
-        {{ poem.poem_title }}
+        {{ poem.poem_title }} 
     {% endblock %}
     {% block body %}
-    <h1>{{ poem.poem_title }}</h1>
+    <h1>{{ poem.poem_title }}</h1> 
+    <h2>by <a href="/poets/{{ poem.poet.poet_id }}">
+        {{ poem.poet.name }} </a></h2>
     {% for line in poem.lines %}
     <p>
         {{line.line_text}}    

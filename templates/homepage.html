@@ -13,6 +13,11 @@
 <h1>Welcome!</h1>
 <h2>Navigation</h2>
 <ul>
+    {% if session.get('user_email') %}
+    <li>
+        <a href="/user_settings">User Settings</a>
+    </li>
+    {% endif %}
     <li>
         <a href="/poems">View all poems</a>
     </li>

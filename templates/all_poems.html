@@ -19,6 +19,8 @@
     <li>
         <a href="/poems/{{ poem.poem_id }}">
         {{ poem.poem_title }} </a>
+        by <a href="poets/{{ poem.poet.poet_id }}">
+        {{ poem.poet.name }} </a>
     </li>
     {% endfor %}
 </ul>
