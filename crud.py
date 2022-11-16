@@ -28,6 +28,25 @@ def get_user_by_user_name(user_name):
 
     return User.query.filter(User.user_name == user_name).first()
 
+def update_user_name(user, newname):
+    """Update user's username."""
+
+    user.user_name = newname
+    db.session.commit()
+    
+
+def update_user_email(user, newemail):
+    """Update user's email."""
+
+    user.email = newemail
+    db.session.commit()
+
+def update_user_password(user, newpass):
+    """Update user's password."""
+
+    user.password = newpass
+    db.session.commit()
+
 def create_poem(poem_title, poet_id):
     """Create and return a new poem."""
 

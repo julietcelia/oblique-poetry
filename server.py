@@ -88,6 +88,52 @@ def process_logout():
 
     return redirect("/")
 
+@app.route("/email", methods=["POST"])
+def change_email():
+    """Process change of user email."""
+
+    user = crud.get_user_by_email(session["user_email"])
+    newemail = request.form.get("newemail")
+    alreadyexists = crud.get_user_by_email(newemail)
+    
+    if alreadyexists:
+        flash("This email already has an associated account.")
+    else:
+        crud.update_user_email(user, newemail)
+        session.clear()
+        flash("Email successfully updated, please log back in with new email.")
+
+    return redirect("/")
+
+@app.route("/password", methods=["POST"])
+def change_password():
+    """Process change of user password."""
+
+    user = crud.get_user_by_email(session["user_email"])
+    newpass = request.form.get("newpass")
+    crud.update_user_password(user, newpass)
+    session.clear()
+    flash("Password successfully updated, please log back in with new password.")
+
+    return redirect("/")
+
+@app.route("/username", methods=["POST"])
+def change_username():
+    """Process change of username."""
+
+    user = crud.get_user_by_email(session["user_email"])
+    newname = request.form.get("newname")
+    alreadyexists = crud.get_user_by_user_name(newname)
+    
+    if alreadyexists:
+        flash("This username already has an associated account.")
+    else:
+        crud.update_user_name(user, newname)
+        session.clear()
+        flash("Username successfully updated, please log back in.")
+
+    return redirect("/")
+
 @app.route("/delete_account")
 def delete_user():
     """Delete User Account."""
