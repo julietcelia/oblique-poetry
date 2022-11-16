@@ -7,6 +7,8 @@ import json
 
 import requests
 
+import random
+
 import crud
 
 from jinja2 import StrictUndefined
@@ -211,11 +213,40 @@ def submit_poem():
 
     return render_template("submit_poem.html")
 
+# @app.route("/create_random_poem")
+# def randomize_poem():
+#     """Render page containing form for creating a randomized poem."""
+
+#     return render_template("create_random_poem.html")
+
 @app.route("/create_random_poem")
 def randomize_poem():
-    """Render page containing form for creating a randomized poem."""
+    
+    all_lines = crud.get_lines()
 
-    return render_template("create_random_poem.html")
+    random_poem = random.choice(all_lines)
+    new_poem = crud.create_poem(random_poem.line_text, 1)
+    db.session.add(new_poem)
+    db.session.commit()
+
+    # take poem text from JSON, split into list of line strings
+    line_number = random.randint(4, 20)
+    new_poem_lines = []
+    i = 0
+    while i < line_number:
+        new_poem_lines.append(random.choice(all_lines))
+        i = i + 1
+
+    # create line object for each line in list
+    for line in new_poem_lines:
+        new_line = crud.create_line(line.line_text, new_poem.poem_id)
+        db.session.add(new_line)
+        db.session.commit()
+    
+    # send user to poem_details template for newly created poem
+    poem = new_poem
+
+    return render_template("poem_details.html", poem=poem)
 
 if __name__ == "__main__":
     connect_to_db(app)

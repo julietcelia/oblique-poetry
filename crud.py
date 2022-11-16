@@ -99,6 +99,11 @@ def create_line(line_text, poem_id):
 
     return line
 
+def get_lines():
+    """Return all lines."""
+
+    return Line.query.all()
+
 def get_lines_by_poem(poem_id):
     """Return lines in a poem by poem's primary key."""
 
