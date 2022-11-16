@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 
 from sys import argv
-from pprint import pprint
 import json
 
 import requests
@@ -31,14 +30,6 @@ def user_settings():
 
     return render_template("user_settings.html", user=user)
 
-@app.route("/poems")
-def all_poems():
-    """View all poems."""
-
-    poems = crud.get_poems()
-
-    return render_template("all_poems.html", poems=poems)
-
 
 @app.route("/poems/<poem_id>")
 def show_poem(poem_id):
@@ -47,33 +38,6 @@ def show_poem(poem_id):
     poem = crud.get_poem_by_id(poem_id)
 
     return render_template("poem_details.html", poem=poem)
-
-@app.route("/poets")
-def all_poets():
-    """View all poets."""
-
-    poets = crud.get_poets()
-
-    return render_template("all_poets.html", poets=poets)
-
-
-@app.route("/poets/<poet_id>")
-def show_poet(poet_id):
-    """Show details on a particular poet."""
-
-    poet = crud.get_poet_by_id(poet_id)
-
-    return render_template("poet_details.html", poet=poet)
-
-
-@app.route("/users")
-def all_users():
-    """View all users."""
-
-    users = crud.get_users()
-
-    return render_template("all_users.html", users=users)
-
 
 @app.route("/users", methods=["POST"])
 def register_user():
@@ -96,16 +60,6 @@ def register_user():
         flash("Account created! Please log in.")
 
     return redirect("/")
-
-
-@app.route("/users/<user_id>")
-def show_user(user_id):
-    """Show details on a particular user."""
-
-    user = crud.get_user_by_id(user_id)
-
-    return render_template("user_details.html", user=user)
-
 
 @app.route("/login", methods=["POST"])
 def process_login():
@@ -139,8 +93,6 @@ def delete_user():
     """Delete User Account."""
 
     user = crud.get_user_by_email(session["user_email"])
-    for comment in user.user_comments:
-        db.session.delete(comment)
     db.session.delete(user)
     db.session.commit()
     session.clear()
@@ -154,75 +106,6 @@ def clear_session():
     session.clear()
 
     return redirect("/")
-
-@app.route("/update_comment", methods=["POST"])
-def update_comment():
-    """Update the text of a user comment."""
-    comment_id = request.json["comment_id"]
-    updated_comment = request.json["updated_comment"]
-    crud.update_comment(comment_id, updated_comment)
-    db.session.commit()
-
-    return "Success"
-
-@app.route("/poems/<poem_id>/comments", methods=["POST"])
-def create_comment(poem_id):
-    """Create a new comment for the poem."""
-
-    logged_in_email = session.get("user_email")
-    comment_text = request.form.get("comment")
-
-    if logged_in_email is None:
-        flash("You must log in to comment on a poem.")
-    elif not comment_text:
-        flash("Error: you didn't write anything for your comment.")
-    else:
-        user = crud.get_user_by_email(logged_in_email)
-        user_id = user.user_id
-        poem = crud.get_poem_by_id(poem_id)
-        poem_title = poem.poem_title
-
-        comment = crud.create_comment(comment_text, user_id, poem_id)
-        db.session.add(comment)
-        db.session.commit()
-
-        flash(f"You successfully left a comment on {poem_title}.")
-
-    return redirect(f"/poems/{poem_id}")
-
-@app.route("/delete_comment/<comment_id>")
-def delete_comment(comment_id):
-    """Delete User Comment."""
-
-    comment = crud.get_comment_by_comment_id(comment_id)
-    user = comment.user
-    db.session.delete(comment)
-    db.session.commit()
-
-    return redirect(f"/users/{user.user_id}")
-
-@app.route("/users/<user_id>/bio", methods=["POST"])
-def create_bio(user_id):
-    """Create a user bio for the logged-in user."""
-
-    logged_in_email = session.get("user_email")
-    bio_text = request.form.get("bio")
-
-    if logged_in_email is None:
-        flash("You must log in to write a user bio.")
-    elif not bio_text:
-        flash("Error: you didn't write anything for your bio.")
-    else:
-        user = crud.get_user_by_email(logged_in_email)
-        user_id = user.user_id
-        user_name = user.user_name
-
-        crud.update_bio(user_id, bio_text)
-        db.session.commit()
-
-        flash(f"You successfully wrote a bio for yourself, {user_name}!")
-
-    return redirect(f"/users/{user_id}")
 
 @app.route("/add_random_poem")
 def add_random_poem():
@@ -275,10 +158,6 @@ def add_random_poem():
     poem = new_poem
 
     return render_template("poem_details.html", poem=poem)
-
-
-
-
 
 if __name__ == "__main__":
     connect_to_db(app)

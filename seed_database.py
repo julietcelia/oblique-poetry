@@ -56,21 +56,6 @@ for line in line_data:
 model.db.session.add_all(lines_in_db)
 model.db.session.commit()
 
-test_comments = [
-    "Beautiful!",
-    "Wow!",
-    "Interesting...",
-    "Intriguing.",
-    "What does it mean?",
-    "Literally me.",
-    "This is a favorite.",
-    "I don't understand this one.",
-    "So pretty...",
-    "I have to read more!",
-    "This one gets me",
-    "So powerful!",
-]
-
 for n in range(10):
     user_name = f"user{n}"
     email = f"user{n}@test.com"
@@ -79,13 +64,3 @@ for n in range(10):
     user = crud.create_user(user_name, email, password)
     model.db.session.add(user)
     model.db.session.commit()
-
-users_in_db = crud.get_users()
-for user in users_in_db:
-    for n in range(10):
-        random_poem = choice(poems_in_db)
-        comment_text = choice(test_comments)
-
-        comment = crud.create_comment(comment_text, user.user_id, random_poem.poem_id)
-        model.db.session.add(comment)
-        model.db.session.commit()

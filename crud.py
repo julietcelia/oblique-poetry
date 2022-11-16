@@ -1,4 +1,4 @@
-from model import db, User, Comment, Poem, Line, Poet, connect_to_db
+from model import db, User, Poem, Line, Poet, connect_to_db
 
 
 def create_user(user_name, email, password):
@@ -27,7 +27,6 @@ def get_user_by_user_name(user_name):
     """Return a user by username."""
 
     return User.query.filter(User.user_name == user_name).first()
-
 
 def create_poem(poem_title, poet_id):
     """Create and return a new poem."""
@@ -70,39 +69,6 @@ def get_poet_by_name(name):
     """Return a poet by name."""
 
     return Poet.query.filter(Poet.name == name).all()
-
-def create_comment(comment_text, user_id, poem_id):
-    """Create and return a new comment."""
-
-    comment = Comment(
-        comment_text = comment_text,
-        user_id = user_id,
-        poem_id = poem_id
-    )
-
-    return comment
-
-def get_comments_by_user_id(user_id):
-    """Return comments by user's primary key."""
-
-    return Comment.query.filter(Comment.user_id == user_id).all()
-
-def get_comment_by_comment_id(comment_id):
-    """Return a comment by primary key."""
-
-    return Comment.query.get(comment_id)
-
-def update_comment(comment_id, new_text):
-    """ Update a comment given primary key and new comment text. """
-    
-    comment = Comment.query.get(comment_id)
-    comment.comment_text = new_text
-
-def update_bio(user_id, bio_text):
-    """ Update a user's bio given user's primary key and text of bio. """
-    
-    user = User.query.get(user_id)
-    user.user_bio = bio_text
 
 def create_line(line_text, poem_id):
     """Create and return a new line of poetry."""

@@ -14,28 +14,9 @@ class User(db.Model):
     user_name = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-    user_bio = db.Column(db.Text)
-
-    user_comments = db.relationship('Comment', back_populates='user')
 
     def __repr__(self):
         return f'<User user_id={self.user_id} user_name={self.user_name}>'
-
-class Comment(db.Model):
-    '''A comment.'''
-
-    __tablename__ = 'comments'
-
-    comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    comment_text = db.Column(db.Text)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    poem_id = db.Column(db.Integer, db.ForeignKey('poems.poem_id'), nullable=False)
-
-    user = db.relationship('User', back_populates='user_comments')
-    poem = db.relationship('Poem', back_populates='poem_comments')
-
-    def __repr__(self):
-        return f"<Comment comment_id={self.comment_id} user_id={self.user_id} poem_id={self.poem_id}>"
 
 class Poem(db.Model):
     '''A poem.'''
@@ -47,7 +28,6 @@ class Poem(db.Model):
     poem_title = db.Column(db.String)
     poet_id = db.Column(db.Integer, db.ForeignKey('poets.poet_id'), nullable=False)
 
-    poem_comments = db.relationship('Comment', back_populates='poem')
     poet = db.relationship('Poet', back_populates='poems')
     lines = db.relationship('Line', back_populates='poem')
 

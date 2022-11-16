@@ -13,32 +13,12 @@
     {% endblock %}
     {% block body %}
     <h1>{{ poem.poem_title }}</h1> 
-    <h2>by <a href="/poets/{{ poem.poet.poet_id }}">
-        {{ poem.poet.name }} </a></h2>
+    <h2>by {{ poem.poet.name }} </h2>
     {% for line in poem.lines %}
     <p>
         {{line.line_text}}    
     </p>
     {% endfor %}
-    {% if session.get('user_email') %}
-    <h2>Comment on this poem:</h2>
-    <form action="/poems/{{ poem.poem_id }}/comments" method="POST">
-        <label for="comment">Comment: </label>
-        <input type="text" id="comment" name="comment">
-        <br>
-        <input type="submit">
-    </form>
-    {% endif %}
-    <h2>User Comments:</h2>
-    <ul>
-        {% for comment in poem.poem_comments %}
-        <li>
-            <a href="/users/{{ comment.user_id }}">
-            {{ comment.user.user_name }}</a> said:
-            '{{ comment.comment_text}}'
-        </li>
-        {% endfor %}
-    </ul>
     {% endblock %}
     
     

@@ -4,35 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poem Hoard Home</title>
+    <title>Oblique Poetry</title>
 </head>
 <body>
     {% extends 'base.html' %}
-    {% block title %}Poem Hoard Home{% endblock %}
+    {% block title %}Oblique Poetry{% endblock %}
     {% block body %}
 <h1>Welcome!</h1>
+<p>
+    This is a tool for sparking creativity. Encounter a random poem, juxtapose lines from disparate poems, 
+    or submit your own responses to a prompt.
+</p>
 <h2>Navigation</h2>
 <ul>
     {% if session.get('user_email') %}
     <li>
-        <a href="/user_settings">User Settings</a>
+        <a href="/user_settings">User settings</a>
     </li>
     {% endif %}
     <li>
-        <a href="/poems">View all poems</a>
+        <a href="/add_random_poem">View a random poem, courtesy of Poemist</a>
     </li>
+    {% if session.get('user_email') %}
     <li>
-        <a href="/poets">View all poets</a>
+        <a href="/submit_poem">Submit an original poem, with or without prompts</a>
     </li>
+    {% endif %}
     <li>
-        <a href="/users">View all users</a>
-    </li>
-    <li>
-        <a href="/add_random_poem">Add and view a random poem from Poemist!</a>
+        <a href="/randomized_poem">Create a randomized poem</a>
     </li>
 </ul>
 {% if not session.get('user_email') %}
-<h2>Create an account</h2>
+<h3>Create an account to access more features</h3>
 <form action="/users" method="POST">
     <p>
         "Email"
@@ -52,7 +55,7 @@
 </form>
 {% endif %}
 {% if not session.get('user_email') %}
-<h2>Log In</h2>
+<h3>Or, log in if you have already created an account</h3>
 <form action="/login" method="POST">
     <p>
         "Email"
@@ -76,7 +79,7 @@
 {% endif %}
 <form action="/clear_session">
     <button type="submit" class="btn">
-    Clear Session
+    Clear Session (DEBUG)
     </button>
 </form>
 {% endblock %}

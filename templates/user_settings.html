@@ -11,57 +11,15 @@
     {% extends 'base.html' %}
     {% block title %}{{ user.user_name }}'s User Settings{% endblock %}
     {% block body %}
-        <h1>{{ user.user_name }}</h1>
-
+    <h1>{{ user.user_name }}</h1>
     {% if user.email == session.get('user_email') %}
-        {% if user.user_bio == None %}
-            <h1>Write a User Bio!:</h1>
-            <form action="/users/{{ user.user_id }}/bio" method="POST">
-            <label for="bio">Bio: </label>
-            <input type="text" id="bio" name="bio">
-            <br>
-            <input type="submit">
-            </form>
-        {% endif %}
-        {% endif %}
-
-        {% if user.user_bio != None %}
-            <div>
-                {{ user.user_bio }}
-            </div>
-        {% endif %}
-        <h1>Comments left on poems:</h1><br>
-        <ul>
-            {% for comment in user.user_comments %}
-            <li>
-                <a href="/poems/{{ comment.poem.poem_id }}">
-                {{ comment.poem.poem_title }}</a>:
-                <div>
-                    {{ comment.comment_text }}
-                </div>
-                {% if user.email == session.get('user_email') %}
-                    <form action="/edit_comment">
-                        <button type="submit" class="btn">
-                            Edit Comment
-                        </button>
-                    </form>
-                    <form action="/delete_comment/{{ comment.comment_id }}">
-                        <button type="submit" class="btn">
-                            Delete Comment
-                        </button>
-                    </form>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% if user.email == session.get('user_email') %}
-            <form action="/delete_account">
-                <button type="submit" class="btn">
+        <form action="/delete_account">
+            <button type="submit" class="btn">
                 Delete Account
-                </button>
-            </form>
-        {% endif %}
-        {% endblock %}
+            </button>
+        </form>
+    {% endif %}
+    {% endblock %}
     
 </body>
 </html>
