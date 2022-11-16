@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Settings</title>
 </head>
 <body>
 
     {% extends 'base.html' %}
     {% block title %}{{ user.user_name }}'s User Settings{% endblock %}
     {% block body %}
-    <h1>{{ user.user_name }}'s User Settings</h1>
+    <h5>{{ user.user_name }}'s User Settings</h5>
     {% if user.email == session.get('user_email') %}
-    <h3>
+    <p>
        Change user credentials: 
-    </h3>
+    </p>
         <form action="/email" method="POST">
             <p>
-                "New Email"
+                Change your email:
                 <input type="text" name="newemail">
             </p>
             <p>
@@ -27,7 +27,7 @@
         </form>
         <form action="/password" method="POST">
             <p>
-                "New Password"
+                Change your password:
                 <input type="text" name="newpass">
             </p>
             <p>
@@ -36,7 +36,7 @@
         </form>
         <form action="/username" method="POST">
             <p>
-                "New Username"
+                Change your username:
                 <input type="text" name="newname">
             </p>
             <p>
@@ -44,13 +44,11 @@
             </p>
         </form>
         </li>
-    <li>
         <form action="/delete_account">
             <button type="submit" class="btn">
-                Delete Account
+                Delete your account?
             </button>
         </form>
-    </li>
     {% endif %}
     {% endblock %}
     

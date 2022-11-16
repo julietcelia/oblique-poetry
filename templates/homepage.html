@@ -10,59 +10,46 @@
     {% extends 'base.html' %}
     {% block title %}Oblique Poetry{% endblock %}
     {% block body %}
-<h1>Welcome to Oblique Poetry</h1>
+    <br>
 <p>
-    This is a tool for sparking creativity. Encounter a random poem, juxtapose lines from disparate poems, 
+    This is a tool for sparking creativity.
+    <br>
+    <br>
+    Encounter a random poem,
+    <br>
+    juxtapose lines from disparate poems,
+    <br> 
     or submit your own responses to a prompt.
 </p>
-<h2>Navigation</h2>
-<ul>
-    {% if session.get('user_email') %}
-    <li>
-        <a href="/user_settings">User settings</a>
-    </li>
-    {% endif %}
-    <li>
-        <a href="/add_random_poem">View a random poem, courtesy of Poemist</a>
-    </li>
-    {% if session.get('user_email') %}
-    <li>
-        <a href="/submit_poem">Submit an original poem, with or without prompts</a>
-    </li>
-    {% endif %}
-    <li>
-        <a href="/create_random_poem">Create a randomized poem</a>
-    </li>
-</ul>
 {% if not session.get('user_email') %}
-<h3>Create an account to access more features</h3>
+<br>
+<p>Create an account to begin:</p>
 <form action="/users" method="POST">
     <p>
-        "Email"
+        Email
         <input type="text" name="email">
     </p>
     <p>
-        "Password"
+        Password
         <input type="password" name="password">
     </p>
     <p>
-        "Username"
+        Username
         <input type="text" name="username">
     </p>
     <p>
         <input type="submit">
     </p>
 </form>
-{% endif %}
-{% if not session.get('user_email') %}
-<h3>Or, log in if you have already created an account</h3>
+<br>
+<p>Or, log in if you have already created an account</p>
 <form action="/login" method="POST">
     <p>
-        "Email"
+        Email
         <input type="text" name="email">
     </p>
     <p>
-        "Password"
+        Password
         <input type="password" name="password">
     </p>
     <p>
@@ -70,18 +57,18 @@
     </p>
 </form>
 {% endif %}
-{% if session.get('user_email') %}
+<!-- {% if session.get('user_email') %}
 <form action="/logout">
     <button type="submit" class="btn">
       Log Out
     </button>
 </form>
-{% endif %}
-<form action="/clear_session">
+{% endif %} -->
+<!-- <form action="/clear_session">
     <button type="submit" class="btn">
     Clear Session (DEBUG)
     </button>
-</form>
+</form> -->
 {% endblock %}
 </body>
 </html>

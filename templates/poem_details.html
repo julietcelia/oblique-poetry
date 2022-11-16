@@ -12,13 +12,17 @@
         {{ poem.poem_title }} 
     {% endblock %}
     {% block body %}
-    <h1>{{ poem.poem_title }}</h1> 
-    <h2>by {{ poem.poet.name }} </h2>
+    <h2>{{ poem.poem_title }}</h2> 
+    <h3>by {{ poem.poet.name }} </h3>
+    <br>
     {% for line in poem.lines %}
     <p>
         {{line.line_text}}    
     </p>
     {% endfor %}
+    <br>
+    <br>
+    <br>
     {% endblock %}
     
     

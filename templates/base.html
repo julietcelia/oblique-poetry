@@ -1,15 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+crossorigin="anonymous">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    
+<title></title>
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Oblique Poetry</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              {% if session.get('user_email') %}
+              <li class="nav-item">
+                <a class="nav-link" href="/user_settings">User Settings</a>
+              </li>
+              {% endif %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Poetry
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="/add_random_poem">View a random poem</a></li>
+                  {% if session.get('user_email') %}
+                  <li><a class="dropdown-item" href="/submit_poem">Submit an original poem</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item" href="/create_random_poem">Create a randomized poem</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        {% if session.get('user_email') %}
+            <form class="container-fluid justify-content-start" action="/logout">
+                <button class="btn btn-sm btn-outline-secondary" type="submit">Log Out</button>
+            </form>
+        {% endif %}
+      </nav>
+
     {% block head %}{% endblock %} {% for msg in get_flashed_messages() %}
     {{ msg }}
     
     {% endfor %} {% block body %}{% endblock %} {% block after_body %}{% endblock %}
+
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+crossorigin="anonymous"></script>
+
 </body>
 </html>
