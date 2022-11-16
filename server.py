@@ -205,6 +205,18 @@ def add_random_poem():
 
     return render_template("poem_details.html", poem=poem)
 
+@app.route("/submit_poem")
+def submit_poem():
+    """Render page containing form for submitting an original poem."""
+
+    return render_template("submit_poem.html")
+
+@app.route("/create_random_poem")
+def randomize_poem():
+    """Render page containing form for creating a randomized poem."""
+
+    return render_template("create_random_poem.html")
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
