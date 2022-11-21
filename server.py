@@ -155,19 +155,41 @@ def clear_session():
 
     return redirect("/")
 
+def make_request():
+    
+    res = requests.get('https://www.poemist.com/api/v1/randompoems')
+
+    print('response:', res)
+    print('response.text:', res.text)
+    print('response.status_code:', res.status_code)
+    print('response.headers:', res.headers)
+
+    if (res.status_code != 204
+            and 'content-type' in res.headers
+            and 'application/json' in res.headers['content-type']):
+        parsed = res.json()
+        print('parsed response:', parsed)
+        return parsed
+    else:
+        print('conditions not met')
+        return make_request()
+
 @app.route("/add_random_poem")
 def add_random_poem():
     '''Make GET request from Poemist API to grab random poem and add it to the database,'''
     '''and then send user to view that poem.'''
     
     # make the API request
-    res = requests.get('https://www.poemist.com/api/v1/randompoems')
-    poemist_poem = res.json()
+
+    poemist_poem = make_request()
     print(poemist_poem)
 
     # check to see if poet is already in database, if not, create the poet
     poets_in_db = crud.get_poets()
-    random_poet = poemist_poem[0]['poet']['name']
+    if poemist_poem[0]["content"]:
+        random_poet = poemist_poem[0]['poet']['name']
+    else:
+        random_poet = poemist_poem[1]['poet']['name']
     new_poem_poet = ""
     for poet in poets_in_db:
         if poet.name == random_poet:
@@ -179,7 +201,10 @@ def add_random_poem():
 
     # check to see if poem is already in database, if not, create the poem
     poems_by_poet = new_poem_poet.poems
-    random_poem = poemist_poem[0]["title"]
+    if poemist_poem[0]["content"]:
+        random_poem = poemist_poem[0]["title"]
+    else:
+        random_poem = poemist_poem[1]["title"]
     poem_in_poets = False
 
     for poem in poems_by_poet:
@@ -192,7 +217,10 @@ def add_random_poem():
         db.session.commit()
 
     # take poem text from JSON, split into list of line strings
-    new_poem_text = poemist_poem[0]["content"]
+    if poemist_poem[0]["content"]:
+        new_poem_text = poemist_poem[0]["content"]
+    else:
+        new_poem_text = poemist_poem[1]["content"]
     new_poem_lines = new_poem_text.split('\n')
     print(new_poem_lines)
 
@@ -212,12 +240,6 @@ def submit_poem():
     """Render page containing form for submitting an original poem."""
 
     return render_template("submit_poem.html")
-
-# @app.route("/create_random_poem")
-# def randomize_poem():
-#     """Render page containing form for creating a randomized poem."""
-
-#     return render_template("create_random_poem.html")
 
 @app.route("/create_random_poem")
 def randomize_poem():

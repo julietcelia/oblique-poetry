@@ -87,7 +87,7 @@ def get_poet_by_id(poet_id):
 def get_poet_by_name(name):
     """Return a poet by name."""
 
-    return Poet.query.filter(Poet.name == name).all()
+    return Poet.query.filter(Poet.name == name).first()
 
 def create_line(line_text, poem_id):
     """Create and return a new line of poetry."""
