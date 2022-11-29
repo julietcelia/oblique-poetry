@@ -10,15 +10,17 @@
     {% extends 'base.html' %}
     {% block title %}Prompts{% endblock %}
     {% block body %}
-    <p>
-        A selection of prompts for your use are stored below.
-        Generate one, two, or all three, depending on your wants and needs.
-    </p>
-    {% for prompt in prompt_list %}
-    <p>
-        {{prompt.prompt_text}}    
-    </p>
-    {% endfor %}
+
+    <div class="container">
+        <p>
+            A writing prompt for your use is stored below.<br>
+            Click the button below to generate it.<br>
+            <button id="get-prompt-button" class="btn btn-primary mt-2">
+                Reveal Prompt
+            </button>
+        </p>
+        <div id="prompt-text"></div>
+        <script src="/static/js/showprompt.js"></script>
     {% endblock %}
 </body>
 </html>

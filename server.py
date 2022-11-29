@@ -266,16 +266,20 @@ def randomize_poem():
 
 @app.route("/prompts")
 def view_prompts():
+    """Displays prompt page."""
     
-    all_prompts = crud.get_prompts()
-    random_prompt_list = []
+    return render_template("prompts.html")
 
-    i = 0
-    while i < 3:
-        random_prompt_list.append(random.choice(all_prompts))
-        i = i + 1
-    
-    return render_template("prompts.html", prompt_list=random_prompt_list)
+@app.route("/show_prompt")
+def show_prompts():
+    """Reveals hidden prompt."""
+
+    all_prompts = crud.get_prompts()
+    prompt_texts = []
+    for prompt in all_prompts:
+        prompt_texts.append(prompt.prompt_text)
+    return random.choice(prompt_texts)
+
 
 if __name__ == "__main__":
     connect_to_db(app)
