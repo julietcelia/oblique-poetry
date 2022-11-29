@@ -264,6 +264,19 @@ def randomize_poem():
 
     return render_template("poem_details.html", poem=poem)
 
+@app.route("/prompts")
+def view_prompts():
+    
+    all_prompts = crud.get_prompts()
+    random_prompt_list = []
+
+    i = 0
+    while i < 3:
+        random_prompt_list.append(random.choice(all_prompts))
+        i = i + 1
+    
+    return render_template("prompts.html", prompt_list=random_prompt_list)
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
