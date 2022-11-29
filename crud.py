@@ -1,10 +1,10 @@
 from model import db, User, Poem, Line, Poet, Prompt, connect_to_db
 
 
-def create_user(user_name, email, password, darkmode=False):
+def create_user(user_name, email, password):
     """Create and return a new user."""
 
-    user = User(user_name=user_name, email=email, password=password, darkmode=darkmode)
+    user = User(user_name=user_name, email=email, password=password)
 
     return user
 
@@ -46,16 +46,6 @@ def update_user_password(user, newpass):
 
     user.password = newpass
     db.session.commit()
-
-def update_darkmode(user):
-    """Toggles darkmode for user."""
-
-    user.darkmode = True
-
-def update_lightmode(user):
-    """Toggles lightmode for user."""
-
-    user.lightmode = False
 
 def create_poem(poem_title, poet_id):
     """Create and return a new poem."""

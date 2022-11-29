@@ -14,7 +14,6 @@ class User(db.Model):
     user_name = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
-    darkmode = db.Column(db.Boolean)
 
     def __repr__(self):
         return f'<User user_id={self.user_id} user_name={self.user_name}>'
