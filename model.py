@@ -14,6 +14,7 @@ class User(db.Model):
     user_name = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    darkmode = db.Column(db.Boolean)
 
     def __repr__(self):
         return f'<User user_id={self.user_id} user_name={self.user_name}>'
@@ -61,6 +62,17 @@ class Poet(db.Model):
 
     def __repr__(self):
         return f'<Poet poet_id={self.poet_id} fname={self.fname} lname={self.lname}>'
+
+class Prompt(db.Model):
+    '''A writing prompt.'''
+
+    __tablename__ = 'prompts'
+
+    prompt_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    prompt_text = db.Column(db.String, unique=True)
+
+    def __repr__(self):
+        return f'<Prompt prompt_id={self.prompt_id} prompt_text={self.prompt_text}>'
 
 def connect_to_db(flask_app, db_uri="postgresql:///sonnettrace", echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri

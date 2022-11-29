@@ -64,3 +64,15 @@ for n in range(10):
     user = crud.create_user(user_name, email, password)
     model.db.session.add(user)
     model.db.session.commit()
+
+with open("data/prompts.json") as f:
+    prompt_data = json.loads(f.read())
+
+prompts_in_db = []
+for prompt in prompt_data:
+    prompt_text = (prompt["prompt_text"])
+    db_prompt = crud.create_prompt(prompt_text)
+    prompts_in_db.append(db_prompt)
+
+model.db.session.add_all(prompts_in_db)
+model.db.session.commit()

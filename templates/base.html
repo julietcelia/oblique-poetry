@@ -10,22 +10,19 @@ crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+<script src="jquery-3.6.1.min.js"></script>
 <title></title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Oblique Poetry</a>
+          <a class="navbar-brand" href="/">Oblique Poetry</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
               {% if session.get('user_email') %}
               <li class="nav-item">
                 <a class="nav-link" href="/user_settings">User Settings</a>
@@ -37,9 +34,7 @@ crossorigin="anonymous">
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a class="dropdown-item" href="/add_random_poem">View a random poem</a></li>
-                  {% if session.get('user_email') %}
-                  <li><a class="dropdown-item" href="/submit_poem">Submit an original poem</a></li>
-                  {% endif %}
+                  <li><a class="dropdown-item" href="/prompts">View writing prompts</a></li>
                   <li><a class="dropdown-item" href="/create_random_poem">Create a randomized poem</a></li>
                 </ul>
               </li>

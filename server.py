@@ -235,12 +235,6 @@ def add_random_poem():
 
     return render_template("poem_details.html", poem=poem)
 
-@app.route("/submit_poem")
-def submit_poem():
-    """Render page containing form for submitting an original poem."""
-
-    return render_template("submit_poem.html")
-
 @app.route("/create_random_poem")
 def randomize_poem():
     
