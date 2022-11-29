@@ -157,7 +157,7 @@ def clear_session():
 
 def make_request():
     
-    res = requests.get('https://www.poemist.com/api/v1/randompoems')
+    res = requests.get('https://poetrydb.org/random')
 
     print('response:', res)
     print('response.text:', res.text)
@@ -176,20 +176,17 @@ def make_request():
 
 @app.route("/add_random_poem")
 def add_random_poem():
-    '''Make GET request from Poemist API to grab random poem and add it to the database,'''
+    '''Make GET request from PoetryDB API to grab random poem and add it to the database,'''
     '''and then send user to view that poem.'''
     
     # make the API request
 
-    poemist_poem = make_request()
-    print(poemist_poem)
+    json_poem = make_request()
+    print(json_poem)
 
     # check to see if poet is already in database, if not, create the poet
     poets_in_db = crud.get_poets()
-    if poemist_poem[0]["content"]:
-        random_poet = poemist_poem[0]['poet']['name']
-    else:
-        random_poet = poemist_poem[1]['poet']['name']
+    random_poet = json_poem[0]['author']
     new_poem_poet = ""
     for poet in poets_in_db:
         if poet.name == random_poet:
@@ -201,10 +198,7 @@ def add_random_poem():
 
     # check to see if poem is already in database, if not, create the poem
     poems_by_poet = new_poem_poet.poems
-    if poemist_poem[0]["content"]:
-        random_poem = poemist_poem[0]["title"]
-    else:
-        random_poem = poemist_poem[1]["title"]
+    random_poem = json_poem[0]["title"]
     poem_in_poets = False
 
     for poem in poems_by_poet:
@@ -217,11 +211,7 @@ def add_random_poem():
         db.session.commit()
 
     # take poem text from JSON, split into list of line strings
-    if poemist_poem[0]["content"]:
-        new_poem_text = poemist_poem[0]["content"]
-    else:
-        new_poem_text = poemist_poem[1]["content"]
-    new_poem_lines = new_poem_text.split('\n')
+    new_poem_lines = json_poem[0]["lines"]
     print(new_poem_lines)
 
     # create line object for each line in list

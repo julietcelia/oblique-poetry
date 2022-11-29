@@ -33,9 +33,11 @@ crossorigin="anonymous">
                   Poetry
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  {% if session.get('user_email') %}
                   <li><a class="dropdown-item" href="/add_random_poem">View a random poem</a></li>
-                  <li><a class="dropdown-item" href="/prompts">View writing prompts</a></li>
                   <li><a class="dropdown-item" href="/create_random_poem">Create a randomized poem</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item" href="/prompts">View writing prompts</a></li>
                 </ul>
               </li>
             </ul>
