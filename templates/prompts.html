@@ -6,21 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompts</title>
 </head>
-<body>
+<body class="bg-light">
     {% extends 'base.html' %}
     {% block title %}Prompts{% endblock %}
     {% block body %}
 
     <div class="container">
-        <p>
-            A writing prompt for your use is stored below.<br>
-            Click the button below to generate it.<br>
-            <button id="get-prompt-button" class="btn btn-primary mt-2">
+        <p class="text-center">
+            ☙ A writing prompt for your use is stored below. ☙<br>
+            Click the button below to generate it.<br><br>
+            <button id="get-prompt-button" class="btn btn-dark">
                 Reveal Prompt
-            </button>
+            </button><br>
         </p>
-        <div id="prompt-text"></div>
+        <div class="border border-dark rounded-end text-center bg-dark text-white" id="prompt-text">☙</div>
+        <br>
+        <h1 class="text-center">❦</h1>
         <script src="/static/js/showprompt.js"></script>
     {% endblock %}
 </body>
 </html>
+

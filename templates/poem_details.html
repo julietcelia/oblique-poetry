@@ -6,20 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ poem.poem_title }}</title>
 </head>
-<body>
+<body class="bg-light">
     {% extends 'base.html' %}
     {% block title %}
         {{ poem.poem_title }} 
     {% endblock %}
     {% block body %}
-    <h2>{{ poem.poem_title }}</h2> 
-    <h3>by {{ poem.poet.name }} </h3>
+    <div class="border border-dark rounded-end">
     <br>
+    <h2 class="poems text-center"> ☙ {{ poem.poem_title }} ☙ </h2> 
+    <h4 class="text-center">by {{ poem.poet.name }} </h4>
+    <br>
+    </div>
+    <br>
+    
     {% for line in poem.lines %}
     <p>
         {{line.line_text}}    
     </p>
     {% endfor %}
+    <h1 class="text-center">❦</h1>
     <br>
     <br>
     <br>

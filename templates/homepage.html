@@ -5,57 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oblique Poetry</title>
+    <style>
+        .container .box {
+                width:540px;
+                margin:50px;
+                display:table;
+            }
+        .container .box .box-row {
+                display:table-row;
+            }
+        .container .box .box-cell {
+                display:table-cell;
+                border:1px solid black;
+                width:25%;
+                padding:10px;
+            }
+    </style>
 </head>
-<body>
+<body class="bg-light">
     {% extends 'base.html' %}
     {% block title %}Oblique Poetry{% endblock %}
     {% block body %}
     <br>
-<p>
-    This is a tool for sparking creativity.
-    <br>
+<p class="text-center">
+    ☙ This is a tool for sparking creativity. ☙
+    <br> 
     <br>
     Encounter a random poem,
     <br>
     juxtapose lines from disparate poems,
     <br> 
     or be inspired by a writing prompt.
+    <br>
 </p>
+<h1 class="text-center">❦</h1>
 {% if not session.get('user_email') %}
-<br>
-<p>Create an account to begin:</p>
-<form action="/users" method="POST">
-    <p>
-        Email
-        <input type="text" name="email">
-    </p>
-    <p>
-        Password
-        <input type="password" name="password">
-    </p>
-    <p>
-        Username
-        <input type="text" name="username">
-    </p>
-    <p>
-        <input type="submit">
-    </p>
-</form>
-<br>
-<p>Or, log in if you have already created an account</p>
-<form action="/login" method="POST">
-    <p>
-        Email
-        <input type="text" name="email">
-    </p>
-    <p>
-        Password
-        <input type="password" name="password">
-    </p>
-    <p>
-        <input type="submit">
-    </p>
-</form>
+<div class="container d-flex justify-content-center">
+    <div class="box">
+        <div class="box-row">
+            <div class="box-cell box1">
+                <p>Create an account to begin:</p>
+                <form action="/users" method="POST">
+                    <p>Email:
+                    <input type="text" name="email"></p>
+                    <p>Password
+                    <input type="password" name="password"></p>
+                    <p>Username
+                    <input type="text" name="username"></p>
+                    <input class="btn btn-dark" type="submit">
+                </form>
+            </div>
+            <div class="box-cell box2">
+                <p>Or, log in if you have already created an account</p>
+                <form action="/login" method="POST">
+                    <p>Email:
+                    <input type="text" name="email"></p>
+                    <p>Password:
+                    <input type="password" name="password"></p>
+                    <input class="btn btn-dark" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endif %}
 <!-- <form action="/clear_session">
     <button type="submit" class="btn">
@@ -63,7 +75,6 @@
     </button>
 </form> -->
 <br>
-<img src="/static/img/dadahome.jpg" class="img-fluid" alt="dada collage by Hannah Höch">
 <br>
 <br>
 <br>

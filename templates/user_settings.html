@@ -6,49 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Settings</title>
 </head>
-<body>
+<body class="bg-light">
 
     {% extends 'base.html' %}
     {% block title %}{{ user.user_name }}'s User Settings{% endblock %}
     {% block body %}
-    <h5>{{ user.user_name }}'s User Settings</h5>
     {% if user.email == session.get('user_email') %}
-    <p>
-       Change user credentials: 
-    </p>
+    <br>
+    <div class="text-center">
+    <h4>
+        ☙ Change user credentials ☙
+    </h4>
+    <br>
         <form action="/email" method="POST">
             <p>
                 Change your email:
                 <input type="text" name="newemail">
-            </p>
-            <p>
-                <input type="submit">
+                <input class="btn btn-dark" type="submit">
             </p>
         </form>
         <form action="/password" method="POST">
             <p>
                 Change your password:
                 <input type="text" name="newpass">
-            </p>
-            <p>
-                <input type="submit">
+                <input class="btn btn-dark" type="submit">
             </p>
         </form>
         <form action="/username" method="POST">
             <p>
                 Change your username:
                 <input type="text" name="newname">
-            </p>
-            <p>
-                <input type="submit">
+                <input class="btn btn-dark" type="submit">
             </p>
         </form>
         </li>
         <form action="/delete_account">
-            <button type="submit" class="btn">
+            <button type="submit" class="btn btn-dark">
                 Delete your account?
             </button>
         </form>
+    </div>
+    <br>
+    <h1 class="text-center">❦</h1>
     {% endif %}
     {% endblock %}
     
